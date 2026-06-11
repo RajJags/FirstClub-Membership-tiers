@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FirstClub Membership</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">FirstClub</p>
+      <h1>Membership Console</h1>
+    </div>
+    <div class="status" id="apiStatus">Connecting</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel catalog-panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Catalog</p>
+          <h2>Plans and Tiers</h2>
+        </div>
+      </div>
+      <div class="plans" id="plans"></div>
+      <div class="tiers" id="tiers"></div>
+    </section>
+
+    <section class="panel action-panel">
+      <div class="tabs" role="tablist" aria-label="Membership actions">
+        <button class="tab active" data-tab="subscribe" type="button">Subscribe</button>
+        <button class="tab" data-tab="manage" type="button">Manage</button>
+        <button class="tab" data-tab="evaluate" type="button">Evaluate</button>
+      </div>
+
+      <form class="tab-view active" id="subscribeForm" data-view="subscribe">
+        <div class="section-head tight">
+          <div>
+            <p class="eyebrow">Action</p>
+            <h2>Subscribe User</h2>
+          </div>
+        </div>
+        <label>
+          User ID
+          <input name="userId" type="number" min="1" value="101" required>
+        </label>
+        <label>
+          Billing Period
+          <select name="billingPeriod" required></select>
+        </label>
+        <label>
+          Tier
+          <select name="tierCode" required></select>
+        </label>
+        <button class="primary" type="submit">Create Membership</button>
+      </form>
+
+      <form class="tab-view" id="manageForm" data-view="manage">
+        <div class="section-head tight">
+          <div>
+            <p class="eyebrow">Action</p>
+            <h2>Manage Membership</h2>
+          </div>
+        </div>
+        <label>
+          User ID
+          <input name="userId" type="number" min="1" value="101" required>
+        </label>
+        <div class="button-row">
+          <button type="button" id="loadMembership">Load Current</button>
+          <button type="button" class="danger" id="cancelMembership">Cancel</button>
+        </div>
+        <label>
+          Change Tier
+          <select name="tierCode" required></select>
+        </label>
+        <button class="primary" type="submit">Apply Tier Change</button>
+      </form>
+
+      <form class="tab-view" id="evaluateForm" data-view="evaluate">
+        <div class="section-head tight">
+          <div>
+            <p class="eyebrow">Action</p>
+            <h2>Evaluate Eligibility</h2>
+          </div>
+        </div>
+        <label>
+          User ID
+          <input name="userId" type="number" min="1" value="202" required>
+        </label>
+        <div class="split">
+          <label>
+            Orders This Month
+            <input name="monthlyOrderCount" type="number" min="0" value="12" required>
+          </label>
+          <label>
+            Order Value
+            <input name="monthlyOrderValue" type="number" min="0" step="0.01" value="20000" required>
+          </label>
+        </div>
+        <button class="primary" type="submit">Evaluate Tier</button>
+      </form>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Result</p>
+          <h2>Latest Response</h2>
+        </div>
+      </div>
+      <div class="summary" id="summary">
+        <div class="empty-state">Run an action to see membership state.</div>
+      </div>
+      <pre id="rawResult"></pre>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
